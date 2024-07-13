@@ -1,0 +1,168 @@
+/*
+ * This is an adjustment of the original modena.css for a consistent dark theme.
+ * Original modena.css here: https://gist.github.com/maxd/63691840fc372f22f470.
+ */
+
+/* Redefine base colors */
+.root {
+    -fx-base: rgb(50, 50, 50);
+    -fx-background: rgb(50, 50, 50);
+
+    /* make controls (buttons, thumb, etc.) slightly lighter */
+    -fx-color: derive(-fx-base, 10%);
+
+    /* text fields and table rows background */
+    -fx-control-inner-background: rgb(20, 20, 20);
+    /* version of -fx-control-inner-background for alternative rows */
+    -fx-control-inner-background-alt: derive(-fx-control-inner-background, 2.5%);
+
+    /* text colors depending on background's brightness */
+    -fx-light-text-color: rgb(220, 220, 220);
+    -fx-mid-text-color: rgb(100, 100, 100);
+    -fx-dark-text-color: rgb(20, 20, 20);
+
+    /* A bright blue for highlighting/accenting objects.  For example: selected
+     * text; selected items in menus, lists, trees, and tables; progress bars */
+    -fx-accent: rgb(0, 80, 100);
+
+    /* color of non-focused yet selected elements */
+    -fx-selection-bar-non-focused: rgb(50, 50, 50);
+}
+
+/* Fix derived prompt color for text fields */
+.text-input {
+    -fx-prompt-text-fill: derive(-fx-control-inner-background, +50%);
+}
+
+/* Keep prompt invisible when focused (above color fix overrides it) */
+.text-input:focused {
+    -fx-prompt-text-fill: transparent;
+}
+
+/* Fix scroll bar buttons arrows colors */
+.scroll-bar > .increment-button > .increment-arrow,
+.scroll-bar > .decrement-button > .decrement-arrow {
+    -fx-background-color: -fx-mark-highlight-color, rgb(220, 220, 220);
+}
+
+.scroll-bar > .increment-button:hover > .increment-arrow,
+.scroll-bar > .decrement-button:hover > .decrement-arrow {
+    -fx-background-color: -fx-mark-highlight-color, rgb(240, 240, 240);
+}
+
+.scroll-bar > .increment-button:pressed > .increment-arrow,
+.scroll-bar > .decrement-button:pressed > .decrement-arrow {
+    -fx-background-color: -fx-mark-highlight-color, rgb(255, 255, 255);
+}
+
+/*******************************************************************************
+ *                                                                             *
+ * List View                                                                   *
+ *                                                                             *
+ ******************************************************************************/
+
+.list-view {
+    text_color: white;
+
+    alternate_row_color: #3c3c3c;
+
+    list_view_background_color: #333;
+    border_color: #171717;
+}
+
+/*******************************************************************************
+ *                                                                             *
+ * Table View                                                                  *
+ *                                                                             *
+ ******************************************************************************/
+
+.table-view {
+    table_background_color: #333;
+    table_view_border_color: #171717;
+
+    alternate_row_color: #3c3c3c;
+
+    text_color: white;
+    hover_text_color: white;
+    selected_text_color: white;
+    selected_unfocused_text_color: white;
+
+    sort_arrow_color: white;
+    show_hide_image_color: sort_arrow_color;
+}
+
+/* Check Box Table Cell */
+.check-box-table-cell {
+    table_check_box_cell_box_background_color: transparent;
+    table_check_box_cell_box_border_color: white;
+    table_check_box_cell_mark_color: white;
+}
+
+/*******************************************************************************
+ *                                                                             *
+ * Tree View                                                                   *
+ *                                                                             *
+ ******************************************************************************/
+
+.tree-view {
+    tree_view_background_color: #333;
+
+    alternate_row_color: #3c3c3c;
+
+    text_color: white;
+    text_selected_color: white;
+    text_hover_color: text_color;
+
+    arrow_color: white;
+    arrow__hover_color: text_hover_color;
+    arrow_selected_hover_color: text_selected_color;
+}
+
+/*******************************************************************************
+ *                                                                             *
+ * Tree Table View                                                             *
+ *                                                                             *
+ ******************************************************************************/
+
+.tree-table-view {
+    table_border_color: #171717;
+    table_background_color: #333;
+
+    alternate_row_color: #3c3c3c;
+
+    table_text_color: #fff;
+    table_text_selected_color: #fff;
+
+    collapse_expand_arrow_color: table_text_color;
+    sort_arrow_color: table_text_color;
+
+    table_column_vline_color: #3e3e3e;
+
+    /* Color of button that filters columns */
+    show_hide_image_color: white;
+}
+
+/*******************************************************************************
+ *                                                                             *
+ * Tab Pane and Tabs                                                           *
+ *                                                                             *
+ ******************************************************************************/
+
+.tab-pane {
+    tab_pane_bottom_border_color: tab_pane_background_color;
+
+    tab_text_color: white;
+    tab_text_hover_color: derive(accent_color, 50%);
+    tab_text_selected_hover_color: derive(accent_color, 30%);
+
+    tab_selected_background_color: #1e1e1e;
+    tab_selected_border_color: #1e1e1e;
+
+    more_button_hover_color: #444;
+    more_button_pressed_color: #333333;
+    more_button_icon_color: white;
+}
+
+*.table-view:focused>*.virtual-flow>*.clipped-container>*.sheet>*.table-row-cell:selected *.table-cell {
+    -fx-background-color: #6b1c90;
+}

@@ -1,0 +1,21 @@
+/* Default style for white keys */
+.button {
+    -fx-background-color: white;
+    -fx-border-color: darkgrey;
+}
+
+/* Style for black keys */
+.button:pressed {
+    -fx-background-color: black;
+    -fx-text-fill: white;
+}
+
+/* Style when a white key is pressed */
+.button.pressed {
+    -fx-background-color: lightgrey;
+}
+
+/* Style when a black key is pressed */
+.button.black.pressed {
+    -fx-background-color: grey;
+}

@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="723.0" prefWidth="1347.0" stylesheets="@css/modena_dark.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.riccardo.pianoapp.PianoController">
+    <center>
+        <AnchorPane prefHeight="162.0" prefWidth="1347.0" style="-fx-background-color: black;">
+            <children>
+                <AnchorPane prefHeight="661.0" prefWidth="1347.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <Pane fx:id="notePane" layoutY="-40.0" prefHeight="341.0" prefWidth="1347.0" AnchorPane.bottomAnchor="320.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                    </children></AnchorPane>
+                <Button fx:id="cKey1" alignment="BOTTOM_CENTER" layoutX="450.0" layoutY="341.0" mnemonicParsing="false" prefHeight="320.0" prefWidth="63.0" style="-fx-background-color: white; -fx-border-color: darkgrey;">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                    </cursor>
+                </Button>
+                <Button fx:id="dKey1" alignment="BOTTOM_CENTER" layoutX="514.0" layoutY="341.0" mnemonicParsing="false" prefHeight="320.0" prefWidth="63.0" style="-fx-background-color: white; -fx-border-color: darkgrey;">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Button>
+                <Button fx:id="eKey1" alignment="BOTTOM_CENTER" layoutX="578.0" layoutY="341.0" mnemonicParsing="false" prefHeight="320.0" prefWidth="63.0" style="-fx-background-color: white; -fx-border-color: darkgrey;">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Button>
+                <Button fx:id="fKey1" alignment="BOTTOM_CENTER" layoutX="642.0" layoutY="341.0" mnemonicParsing="false" prefHeight="320.0" prefWidth="63.0" style="-fx-background-color: white; -fx-border-color: darkgrey;">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Button>
+                <Button fx:id="gKey1" alignment="BOTTOM_CENTER" layoutX="706.0" layoutY="341.0" mnemonicParsing="false" prefHeight="320.0" prefWidth="63.0" style="-fx-background-color: white; -fx-border-color: darkgrey;">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Button>
+                <Button fx:id="aKey1" alignment="BOTTOM_CENTER" layoutX="770.0" layoutY="341.0" mnemonicParsing="false" prefHeight="320.0" prefWidth="63.0" style="-fx-background-color: white; -fx-border-color: darkgrey;">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Button>
+                <Button fx:id="bKey1" alignment="BOTTOM_CENTER" layoutX="834.0" layoutY="341.0" mnemonicParsing="false" prefHeight="320.0" prefWidth="63.0" style="-fx-background-color: white; -fx-border-color: darkgrey;">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Button>
+                <Button fx:id="cDKey1" alignment="BOTTOM_CENTER" layoutX="493.0" layoutY="341.0" mnemonicParsing="false" prefHeight="209.0" prefWidth="44.0" style="-fx-background-color: black;" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Button>
+                <Button fx:id="dDKey1" alignment="BOTTOM_LEFT" layoutX="555.0" layoutY="341.0" mnemonicParsing="false" prefHeight="209.0" prefWidth="44.0" style="-fx-background-color: black;" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Button>
+                <Button fx:id="fDKey1" alignment="BOTTOM_CENTER" layoutX="683.0" layoutY="341.0" mnemonicParsing="false" prefHeight="209.0" prefWidth="44.0" style="-fx-background-color: black;" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Button>
+                <Button fx:id="gDKey1" alignment="BOTTOM_CENTER" layoutX="747.0" layoutY="341.0" mnemonicParsing="false" prefHeight="209.0" prefWidth="44.0" style="-fx-background-color: black;" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Button>
+                <Button fx:id="aDKey1" alignment="BOTTOM_CENTER" layoutX="811.0" layoutY="341.0" mnemonicParsing="false" prefHeight="209.0" prefWidth="44.0" style="-fx-background-color: black;" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Button>
+                <Button fx:id="cKey2" alignment="BOTTOM_CENTER" layoutX="897.0" layoutY="341.0" mnemonicParsing="false" prefHeight="320.0" prefWidth="63.0" style="-fx-background-color: white; -fx-border-color: darkgrey;">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                    </cursor>
+                </Button>
+                <Button fx:id="dKey2" alignment="BOTTOM_CENTER" layoutX="961.0" layoutY="341.0" mnemonicParsing="false" prefHeight="320.0" prefWidth="63.0" style="-fx-background-color: white; -fx-border-color: darkgrey;">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Button>
+                <Button fx:id="eKey2" alignment="BOTTOM_CENTER" layoutX="1025.0" layoutY="341.0" mnemonicParsing="false" prefHeight="320.0" prefWidth="63.0" style="-fx-background-color: white; -fx-border-color: darkgrey;">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Button>
+                <Button fx:id="fKey2" alignment="BOTTOM_CENTER" layoutX="1089.0" layoutY="341.0" mnemonicParsing="false" prefHeight="320.0" prefWidth="63.0" style="-fx-background-color: white; -fx-border-color: darkgrey;">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Button>
+                <Button fx:id="gKey2" alignment="BOTTOM_CENTER" layoutX="1153.0" layoutY="341.0" mnemonicParsing="false" prefHeight="320.0" prefWidth="63.0" style="-fx-background-color: white; -fx-border-color: darkgrey;">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Button>
+                <Button fx:id="aKey2" alignment="BOTTOM_CENTER" layoutX="1217.0" layoutY="341.0" mnemonicParsing="false" prefHeight="320.0" prefWidth="63.0" style="-fx-background-color: white; -fx-border-color: darkgrey;">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Button>
+                <Button fx:id="bKey2" alignment="BOTTOM_CENTER" layoutX="1281.0" layoutY="341.0" mnemonicParsing="false" prefHeight="320.0" prefWidth="63.0" style="-fx-background-color: white; -fx-border-color: darkgrey;">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Button>
+                <Button fx:id="cDKey2" alignment="BOTTOM_CENTER" layoutX="940.0" layoutY="341.0" mnemonicParsing="false" prefHeight="209.0" prefWidth="44.0" style="-fx-background-color: black;" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Button>
+                <Button fx:id="dDKey2" alignment="BOTTOM_LEFT" layoutX="1002.0" layoutY="341.0" mnemonicParsing="false" prefHeight="209.0" prefWidth="44.0" style="-fx-background-color: black;" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Button>
+                <Button fx:id="fDKey2" alignment="BOTTOM_CENTER" layoutX="1130.0" layoutY="341.0" mnemonicParsing="false" prefHeight="209.0" prefWidth="44.0" style="-fx-background-color: black;" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Button>
+                <Button fx:id="gDKey2" alignment="BOTTOM_CENTER" layoutX="1194.0" layoutY="341.0" mnemonicParsing="false" prefHeight="209.0" prefWidth="44.0" style="-fx-background-color: black;" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Button>
+                <Button fx:id="aDKey2" alignment="BOTTOM_CENTER" layoutX="1258.0" layoutY="341.0" mnemonicParsing="false" prefHeight="209.0" prefWidth="44.0" style="-fx-background-color: black;" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Button>
+                <Button fx:id="cKey" alignment="BOTTOM_CENTER" layoutX="3.0" layoutY="341.0" mnemonicParsing="false" prefHeight="320.0" prefWidth="63.0" style="-fx-background-color: white; -fx-border-color: darkgrey;">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                    </cursor>
+                </Button>
+                <Button fx:id="dKey" alignment="BOTTOM_CENTER" layoutX="67.0" layoutY="341.0" mnemonicParsing="false" prefHeight="320.0" prefWidth="63.0" style="-fx-background-color: white; -fx-border-color: darkgrey;">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Button>
+                <Button fx:id="eKey" alignment="BOTTOM_CENTER" layoutX="131.0" layoutY="341.0" mnemonicParsing="false" prefHeight="320.0" prefWidth="63.0" style="-fx-background-color: white; -fx-border-color: darkgrey;">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Button>
+                <Button fx:id="fKey" alignment="BOTTOM_CENTER" layoutX="195.0" layoutY="341.0" mnemonicParsing="false" prefHeight="320.0" prefWidth="63.0" style="-fx-background-color: white; -fx-border-color: darkgrey;">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Button>
+                <Button fx:id="gKey" alignment="BOTTOM_CENTER" layoutX="259.0" layoutY="341.0" mnemonicParsing="false" prefHeight="320.0" prefWidth="63.0" style="-fx-background-color: white; -fx-border-color: darkgrey;">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Button>
+                <Button fx:id="aKey" alignment="BOTTOM_CENTER" layoutX="323.0" layoutY="341.0" mnemonicParsing="false" prefHeight="320.0" prefWidth="63.0" style="-fx-background-color: white; -fx-border-color: darkgrey;">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Button>
+                <Button fx:id="bKey" alignment="BOTTOM_CENTER" layoutX="387.0" layoutY="341.0" mnemonicParsing="false" prefHeight="320.0" prefWidth="63.0" style="-fx-background-color: white; -fx-border-color: darkgrey;">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Button>
+                <Button fx:id="cDKey" alignment="BOTTOM_CENTER" layoutX="46.0" layoutY="341.0" mnemonicParsing="false" prefHeight="209.0" prefWidth="44.0" style="-fx-background-color: black;" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Button>
+                <Button fx:id="dDKey" alignment="BOTTOM_LEFT" layoutX="108.0" layoutY="341.0" mnemonicParsing="false" prefHeight="209.0" prefWidth="44.0" style="-fx-background-color: black;" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Button>
+                <Button fx:id="fDKey" alignment="BOTTOM_CENTER" layoutX="236.0" layoutY="341.0" mnemonicParsing="false" prefHeight="209.0" prefWidth="44.0" style="-fx-background-color: black;" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Button>
+                <Button fx:id="gDKey" alignment="BOTTOM_CENTER" layoutX="300.0" layoutY="341.0" mnemonicParsing="false" prefHeight="209.0" prefWidth="44.0" style="-fx-background-color: black;" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Button>
+                <Button fx:id="aDKey" alignment="BOTTOM_CENTER" layoutX="364.0" layoutY="341.0" mnemonicParsing="false" prefHeight="209.0" prefWidth="44.0" style="-fx-background-color: black;" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Button>
+            </children>
+        </AnchorPane>
+    </center>
+    <top>
+        <ToolBar cache="true" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <items>
+                <Button fx:id="loadMidiButton" mnemonicParsing="false" text="Load MIDI">
+               <graphic>
+                  <ImageView fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/load1.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+                <Button fx:id="playButton" mnemonicParsing="false" text="Play">
+               <graphic>
+                  <ImageView fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/play1.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+                <Button fx:id="pauseButton" mnemonicParsing="false" text="Pause">
+               <graphic>
+                  <ImageView fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/pause1.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+                <Button fx:id="stopButton" mnemonicParsing="false" text="Stop">
+               <graphic>
+                  <ImageView fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/stop1.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button> <!-- New Button -->
+                <Label text="BPM:">
+               <graphic>
+                  <ImageView fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/time1.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Label>
+                <TextField fx:id="bpmTextField" alignment="CENTER" prefHeight="25.0" prefWidth="73.0" promptText="Enter BPM" />
+            <Button fx:id="recordButton" mnemonicParsing="false" text="REC">
+               <graphic>
+                  <ImageView fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/rec.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Label fx:id="recordingTimeLabel" />
+                <Label text="Song:">
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets>
+                    <font>
+                        <Font size="13.0" />
+                    </font>
+                    <padding>
+                        <Insets left="20.0" />
+                    </padding>
+                </Label>
+                <Label fx:id="fileNameLabel">
+                    <padding>
+                        <Insets left="5.0" />
+                    </padding>
+                </Label>
+            </items>
+        </ToolBar>
+    </top>
+    <bottom>
+        <ProgressBar fx:id="progressBar" prefHeight="18.0" prefWidth="1345.0" progress="0.0" BorderPane.alignment="CENTER" />
+    </bottom>
+</BorderPane>
