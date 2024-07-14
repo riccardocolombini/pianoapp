@@ -24,8 +24,8 @@ The Piano MIDI Application is a Java-based application that allows users to load
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/riccardo-colombini/piano-midi-app.git
-   cd piano-midi-app
+   git clone https://github.com/riccardocolombini/pianoapp.git
+   cd pianoapp
    ```
    
 2. Open the project in your favorite Java IDE (e.g., IntelliJ IDEA, Eclipse).
