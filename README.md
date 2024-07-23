@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Piano MIDI Application is a Java-based application that allows users to load, play, and record MIDI files. It provides a visual representation of falling notes as they are played, and it allows users to play the piano manually or automatically. The application also supports recording user inputs as MIDI files.
+The Piano MIDI Application is a JavaFX application that allows users to load, play, and record MIDI files. It provides a visual representation of falling notes as they are played, and it allows users to play the piano manually or automatically. The application also supports recording user inputs as MIDI files.
 
 ## Features
 
@@ -28,11 +28,9 @@ The Piano MIDI Application is a Java-based application that allows users to load
    cd pianoapp
    ```
    
-2. Open the project in your favorite Java IDE (e.g., IntelliJ IDEA, Eclipse).
+2. Open the project in your Java IDE (e.g. IntelliJ IDEA).
 
-3. Ensure that JavaFX is correctly set up in your IDE.
-
-4. Build and run the project.
+3. Build and run the project.
 
 ### Usage
 1. Loading a MIDI File:
