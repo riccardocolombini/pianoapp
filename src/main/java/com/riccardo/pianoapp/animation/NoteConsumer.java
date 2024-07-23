@@ -19,7 +19,6 @@ public class NoteConsumer extends Rectangle {
     private final int note;
     private final long noteDuration;
     private final Map<Button, String> originalStyleMap;
-    private Timeline consumptionTimeline;
 
     /**
      * Constructor for NoteConsumer.
@@ -31,7 +30,7 @@ public class NoteConsumer extends Rectangle {
      * @param y                The y-coordinate of the note.
      * @param width            The width of the note.
      * @param height           The height of the note.
-     * @param originalStyleMap A map of original styles for buttons.
+     * @param originalStyleMap A map of the original styles for the buttons.
      * @param notePane         The pane where the note is animated.
      */
     public NoteConsumer(Button keyButton, int note, long noteDuration, double x, double y, double width, double height, Map<Button, String> originalStyleMap, Pane notePane) {
@@ -62,7 +61,7 @@ public class NoteConsumer extends Rectangle {
      */
     public void startConsumption(Pane pane) {
         keyButton.setStyle("-fx-background-color: #87CEEB;");
-        consumptionTimeline = new Timeline(
+        Timeline consumptionTimeline = new Timeline(
                 new KeyFrame(Duration.ZERO, new KeyValue(this.yProperty(), this.getY()), new KeyValue(this.heightProperty(), this.getHeight())),
                 new KeyFrame(Duration.millis(noteDuration), new KeyValue(this.yProperty(), this.getY() + this.getHeight()), new KeyValue(this.heightProperty(), 0, Interpolator.LINEAR))
         );

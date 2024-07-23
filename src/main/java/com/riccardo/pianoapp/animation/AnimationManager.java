@@ -24,9 +24,9 @@ public class AnimationManager {
     /**
      * Constructor for AnimationManager.
      *
-     * @param notePane         The pane where notes will be animated.
+     * @param notePane         The pane in which notes are animated.
      * @param progressBar      The progress bar to indicate playback progress.
-     * @param originalStyleMap A map of original styles for buttons.
+     * @param originalStyleMap The map to keep track of the original key style for buttons.
      */
     public AnimationManager(Pane notePane, ProgressBar progressBar, Map<Button, String> originalStyleMap) {
         this.notePane = notePane;
@@ -40,9 +40,9 @@ public class AnimationManager {
      * @param sequence        The MIDI sequence to be played.
      * @param startTick       The tick to start playback from.
      * @param bpm             The playback speed in beats per minute.
-     * @param playbackSpeed   The playback speed multiplier.
+     * @param playbackSpeed   The playback speed changer.
      * @param notesPlayed     The atomic integer tracking notes played.
-     * @param totalNotes      The total number of notes in the sequence.
+     * @param totalNotes      The total number of notes in the MIDI sequence.
      * @param reverseNoteMap  The map of note values to buttons.
      */
     public void startNoteAnimations(Sequence sequence, long startTick, int bpm, double playbackSpeed, AtomicInteger notesPlayed, int totalNotes, Map<Integer, Button> reverseNoteMap) {
@@ -60,7 +60,7 @@ public class AnimationManager {
                         if (noteOn) {
                             Button keyButton = reverseNoteMap.get(note);
                             if (keyButton != null) {
-                                long noteDuration = getNoteDuration(track, i); // Get the duration of the note
+                                long noteDuration = getNoteDuration(track, i);
                                 Platform.runLater(() -> scheduleFallingNoteAnimation(note, eventTimestamp, keyButton, noteDuration, totalNotes, notesPlayed, playbackSpeed, notePane));
                             }
                         }
@@ -82,6 +82,18 @@ public class AnimationManager {
         return 0;
     }
 
+    /**
+     * Schedules the animation of a falling musical note and handles the note consumption when the animation finishes.
+     *
+     * @param note              The MIDI note value of the falling note.
+     * @param eventTimestamp    The timestamp at which the note event occurs.
+     * @param keyButton         The button representing the key associated with the note.
+     * @param noteDuration      The duration of the note in milliseconds.
+     * @param totalNotes        The total number of notes to be played.
+     * @param notesPlayed       The atomic integer tracking the number of notes played.
+     * @param playbackSpeed     The speed at which the note should fall.
+     * @param notePane          The pane in which the falling note animation appears.
+     */
     private void scheduleFallingNoteAnimation(int note, long eventTimestamp, Button keyButton, long noteDuration, int totalNotes, AtomicInteger notesPlayed, double playbackSpeed, Pane notePane) {
         if (keyButton == null) return;
 
@@ -104,7 +116,7 @@ public class AnimationManager {
         );
         timeline.setDelay(Duration.millis(delay));
         timeline.setOnFinished(event -> {
-            notePane.getChildren().remove(fallingNote); // Remove the falling note
+            notePane.getChildren().remove(fallingNote);
             NoteConsumer noteConsumer = new NoteConsumer(keyButton, note, noteDuration, x, paneHeight - noteHeight, keyButton.getWidth(), noteHeight, originalStyleMap, notePane);
             notePane.getChildren().add(noteConsumer);
             noteConsumer.startConsumption(notePane);
@@ -125,7 +137,7 @@ public class AnimationManager {
     /**
      * Updates the animation speeds for all falling notes.
      *
-     * @param playbackSpeed The new playback speed multiplier.
+     * @param playbackSpeed     The new playback speed multiplier.
      */
     public void updateAnimationSpeeds(double playbackSpeed) {
         notePane.getChildren().forEach(node -> {
@@ -149,7 +161,7 @@ public class AnimationManager {
     /**
      * Resumes all animations.
      *
-     * @param elapsedTime The time elapsed since the animations were paused.
+     * @param elapsedTime   The time elapsed since the animations were paused.
      */
     public void resumeAnimations(long elapsedTime) {
         notePane.getChildren().forEach(node -> {

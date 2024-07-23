@@ -55,7 +55,7 @@ public class FallingNote extends Rectangle {
     /**
      * Updates the speed of the falling note animation.
      *
-     * @param playbackSpeed The new playback speed multiplier.
+     * @param playbackSpeed     The new playback speed changer.
      */
     public void updateSpeed(double playbackSpeed) {
         this.playbackSpeed = playbackSpeed;

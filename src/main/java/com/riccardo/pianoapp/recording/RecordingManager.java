@@ -141,6 +141,9 @@ public class RecordingManager {
         }
     }
 
+    /**
+     * Starts the recording timer by initializing and playing a TimeLine that updates the recording time label every second.
+     */
     private void startRecordingTimer() {
         recordingTimeline.setCycleCount(Timeline.INDEFINITE);
         recordingTimeline.getKeyFrames().add(
@@ -149,6 +152,10 @@ public class RecordingManager {
         recordingTimeline.playFromStart();
     }
 
+    /**
+     * Updates the recording time label with the elapsed recording time.
+     * The elapsed time is calculated in minutes and seconds format.
+     */
     private void updateRecordingTime() {
         long elapsedMillis = System.currentTimeMillis() - recordingStartTime;
         long elapsedSeconds = elapsedMillis / 1000;
@@ -157,6 +164,9 @@ public class RecordingManager {
         Platform.runLater(() -> recordingTimeLabel.setText(String.format("%02d:%02d", minutes, seconds)));
     }
 
+    /**
+     * Displays an information alert indicating that the recording has been saved successfully.
+     */
     private void showInformation() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information");
@@ -165,6 +175,9 @@ public class RecordingManager {
         alert.showAndWait();
     }
 
+    /**
+     * Displays an error alert indicating that the recording failed to save.
+     */
     private void showError() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");

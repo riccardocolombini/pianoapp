@@ -25,10 +25,10 @@ public class MidiManager {
     /**
      * Loads a MIDI file and returns the sequence.
      *
-     * @param file The MIDI file to be loaded.
-     * @return The loaded MIDI sequence.
+     * @param file  The MIDI file to be loaded.
+     * @return  The loaded MIDI sequence.
      * @throws InvalidMidiDataException If the MIDI data is invalid.
-     * @throws IOException              If an I/O error occurs.
+     * @throws IOException  If an I/O error occurs.
      */
     public Sequence loadMidiFile(File file) throws InvalidMidiDataException, IOException {
         return MidiSystem.getSequence(file);
@@ -47,8 +47,8 @@ public class MidiManager {
                 if (event.getMessage() instanceof MetaMessage mm) {
                     if (mm.getType() == 0x51) {
                         byte[] data = mm.getData();
-                        int tempo = ((data[0] & 0xFF) << 16) | ((data[1] & 0xFF) << 8) | (data[2] & 0xFF);
-                        return 60000000 / tempo;
+                        int time = ((data[0] & 0xFF) << 16) | ((data[1] & 0xFF) << 8) | (data[2] & 0xFF);
+                        return 60000000 / time;
                     }
                 }
             }
