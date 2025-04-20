@@ -14,4 +14,6 @@ module com.riccardo.pianomidi {
     opens com.riccardo.pianoapp.recording to javafx.fxml;
     exports com.riccardo.pianoapp.sound;
     opens com.riccardo.pianoapp.sound to javafx.fxml;
+    exports com.riccardo.pianoapp.state;
+    opens com.riccardo.pianoapp.state to javafx.fxml;
 }

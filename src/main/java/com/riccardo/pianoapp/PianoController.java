@@ -4,6 +4,10 @@ import com.riccardo.pianoapp.animation.AnimationManager;
 import com.riccardo.pianoapp.midi.MidiManager;
 import com.riccardo.pianoapp.recording.RecordingManager;
 import com.riccardo.pianoapp.sound.NoteHandler;
+import com.riccardo.pianoapp.state.PausedState;
+import com.riccardo.pianoapp.state.PlaybackState;
+import com.riccardo.pianoapp.state.PlayingState;
+import com.riccardo.pianoapp.state.StoppedState;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -21,17 +25,20 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Controller for the Piano MIDI application.
  */
 public class PianoController implements Initializable {
-    public static MidiChannel channel;
-    private Sequence sequence;
-    private Synthesizer synthesizer;
-    private double playbackSpeed = 1.0;
-    private boolean isAutoPlaying = false;
+
+    // Variabili di stato
+    private PlaybackState playbackState;
     private boolean isPlaying = false;
     private boolean isPaused = false;
     private boolean isSequenceLoaded = false;
-    private long pauseTime;
-    private int bpm = 120;
     private long currentTick = 0;
+    public long pauseTime;
+    private double playbackSpeed = 1.0;
+    private int bpm = 120;
+
+    public static MidiChannel channel;
+    private Sequence sequence;
+    private Synthesizer synthesizer;
 
     @FXML
     private Button cKey, cDKey, dKey, dDKey, eKey, fKey, fDKey, gKey, gDKey, aKey, aDKey, bKey;
@@ -60,9 +67,9 @@ public class PianoController implements Initializable {
     private final Map<Integer, Button> reverseNoteMap = new HashMap<>();
     private final Map<Button, String> originalStyleMap = new HashMap<>();
 
-    private AnimationManager animationManager;
+    public AnimationManager animationManager;
     private RecordingManager recordingManager;
-    private MidiManager midiManager;
+    MidiManager midiManager;
     private UiManager uiManager;
     private NoteHandler noteHandler;
 
@@ -75,6 +82,7 @@ public class PianoController implements Initializable {
             saveOriginalStyles();
             setupButtonActions();
             fileNameLabel.setText("No file loaded");
+            playbackState = new StoppedState(); // Imposta lo stato iniziale su "Stopped"
 
         } catch (MidiUnavailableException | InvalidMidiDataException | IOException e) {
             e.printStackTrace();
@@ -167,6 +175,11 @@ public class PianoController implements Initializable {
         }
     }
 
+    public void setIsPlaying(boolean isPlaying) {
+        this.isPlaying = isPlaying;
+    }
+
+
     private void saveOriginalStyles() {
         noteMap.keySet().forEach(button -> originalStyleMap.put(button, button.getStyle()));
     }
@@ -188,7 +201,6 @@ public class PianoController implements Initializable {
         if (selectedFile != null) {
             try {
                 sequence = MidiSystem.getSequence(selectedFile);
-                isAutoPlaying = false;
                 isSequenceLoaded = true;
                 fileNameLabel.setText(selectedFile.getName());
 
@@ -197,6 +209,7 @@ public class PianoController implements Initializable {
                 bpm = defaultBpm;
                 playbackSpeed = bpm / 120.0;
                 updateAnimationSpeeds();
+                playbackState = new StoppedState(); // Quando si carica un nuovo file, la riproduzione è fermata
 
             } catch (InvalidMidiDataException | IOException e) {
                 e.printStackTrace();
@@ -204,39 +217,28 @@ public class PianoController implements Initializable {
         }
     }
 
-    private void playMidi() {
-        if (!isPlaying) {
-            if (sequence != null && isSequenceLoaded) {
-                if (isPaused) {
-                    resumeAnimations();
-                } else {
-                    isAutoPlaying = true;
-                    startNoteAnimations(currentTick);
-                }
-                isPlaying = true;
-                isPaused = false;
-            } else {
-                System.out.println("No MIDI sequence loaded.");
-            }
-        } else {
-            System.out.println("MIDI is already playing.");
+    public void playMidi() {
+        if (playbackState instanceof StoppedState || playbackState instanceof PausedState) {
+            playbackState.play(this);
+        }
+    }
+
+    private void pauseMidi() {
+        if (playbackState instanceof PlayingState) {
+            playbackState.pause(this);
         }
     }
 
     private void stopMidi() {
-        stopAnimations();
-        isPlaying = false;
-        isPaused = false;
-        isAutoPlaying = false;
-        currentTick = 0;
+        if (playbackState instanceof PlayingState || playbackState instanceof PausedState) {
+            playbackState.stop(this);
+        }
     }
 
-    private void pauseMidi() {
-        if (isPlaying) {
-            pauseAnimations();
-            isPlaying = false;
-            isPaused = true;
-        }
+    public void stopPlayback() {
+        currentTick = 0;  // Resetta il tick corrente
+        progressBar.setProgress(0);  // Resetta la progress bar
+        animationManager.stopAnimations();  // Ferma tutte le animazioni in corso
     }
 
     private void toggleRecording() {
@@ -262,6 +264,30 @@ public class PianoController implements Initializable {
         }
     }
 
+    private void updateAnimationSpeeds() {
+        animationManager.updateAnimationSpeeds(playbackSpeed);
+    }
+
+    public void changePlaybackState(PlaybackState playbackState) {
+        this.playbackState = playbackState;
+    }
+
+    public void resetPlayback() {
+        currentTick = 0;
+        progressBar.setProgress(0);
+    }
+
+    public void resumePlayback() {
+        long elapsedTime = System.currentTimeMillis() - pauseTime;
+        animationManager.resumeAnimations(elapsedTime);  // Riprendi le animazioni
+        midiManager.resumePlayback(elapsedTime);  // Riprendi la riproduzione MIDI
+    }
+
+
+    public void startPlayback() {
+        startNoteAnimations(currentTick);
+    }
+
     private void startNoteAnimations(long startTick) {
         if (sequence == null) {
             System.out.println("No MIDI sequence loaded.");
@@ -275,40 +301,8 @@ public class PianoController implements Initializable {
         animationManager.startNoteAnimations(sequence, startTick, bpm, playbackSpeed, notesPlayed, totalNotes, reverseNoteMap);
     }
 
-    private void updateAnimationSpeeds() {
-        animationManager.updateAnimationSpeeds(playbackSpeed);
-    }
-
-    private void pauseAnimations() {
-        pauseTime = System.currentTimeMillis();
-        animationManager.pauseAnimations();
-    }
-
-    private void resumeAnimations() {
-        long resumeTime = System.currentTimeMillis();
-        long elapsedTime = resumeTime - pauseTime;
-        animationManager.resumeAnimations(elapsedTime);
-    }
-
-    private void stopAnimations() {
-        animationManager.stopAnimations();
-        isAutoPlaying = false;
-        isPlaying = false;
-        isPaused = false;
-        progressBar.setProgress(0);
-        resetKeyStyles();
-    }
-
-    private void resetKeyStyles() {
-        noteMap.keySet().forEach(button -> {
-            button.setStyle(originalStyleMap.get(button));
-            button.getStyleClass().remove("pressed");
-            channel.noteOff(noteMap.get(button));
-        });
-    }
-
     private void closeResources() {
-        stopAnimations();
+        stopMidi();
         if (synthesizer != null && synthesizer.isOpen()) {
             synthesizer.close();
         }

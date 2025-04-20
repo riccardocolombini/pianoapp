@@ -6,20 +6,20 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
-import javax.sound.midi.MidiEvent;
-import javax.sound.midi.Sequence;
-import javax.sound.midi.ShortMessage;
-import javax.sound.midi.Track;
+import javax.sound.midi.*;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import static com.riccardo.pianoapp.PianoController.channel;
 
 /**
  * Manages the animations of falling notes and the progress bar.
  */
-public class AnimationManager {
+public class AnimationManager implements PlaybackObserver {
     private final Pane notePane;
     private final ProgressBar progressBar;
     private final Map<Button, String> originalStyleMap;
+    private double playbackSpeed;
 
     /**
      * Constructor for AnimationManager.
@@ -32,18 +32,19 @@ public class AnimationManager {
         this.notePane = notePane;
         this.progressBar = progressBar;
         this.originalStyleMap = originalStyleMap;
+        this.playbackSpeed = 1.0;  // Default playback speed
     }
 
     /**
      * Starts the note animations based on the provided MIDI sequence.
      *
-     * @param sequence        The MIDI sequence to be played.
-     * @param startTick       The tick to start playback from.
-     * @param bpm             The playback speed in beats per minute.
-     * @param playbackSpeed   The playback speed changer.
-     * @param notesPlayed     The atomic integer tracking notes played.
-     * @param totalNotes      The total number of notes in the MIDI sequence.
-     * @param reverseNoteMap  The map of note values to buttons.
+     * @param sequence       The MIDI sequence to be played.
+     * @param startTick      The tick to start playback from.
+     * @param bpm            The playback speed in beats per minute.
+     * @param playbackSpeed  The playback speed changer.
+     * @param notesPlayed    The atomic integer tracking notes played.
+     * @param totalNotes     The total number of notes in the MIDI sequence.
+     * @param reverseNoteMap The map of note values to buttons.
      */
     public void startNoteAnimations(Sequence sequence, long startTick, int bpm, double playbackSpeed, AtomicInteger notesPlayed, int totalNotes, Map<Integer, Button> reverseNoteMap) {
         long startTime = System.currentTimeMillis();
@@ -61,7 +62,7 @@ public class AnimationManager {
                             Button keyButton = reverseNoteMap.get(note);
                             if (keyButton != null) {
                                 long noteDuration = getNoteDuration(track, i);
-                                Platform.runLater(() -> scheduleFallingNoteAnimation(note, eventTimestamp, keyButton, noteDuration, totalNotes, notesPlayed, playbackSpeed, notePane));
+                                Platform.runLater(() -> scheduleFallingNoteAnimation(note, eventTimestamp, keyButton, noteDuration, totalNotes, notesPlayed, playbackSpeed, notePane, channel));
                             }
                         }
                     }
@@ -93,8 +94,9 @@ public class AnimationManager {
      * @param notesPlayed       The atomic integer tracking the number of notes played.
      * @param playbackSpeed     The speed at which the note should fall.
      * @param notePane          The pane in which the falling note animation appears.
+     * @param channel           The MIDI channel used for playback.
      */
-    private void scheduleFallingNoteAnimation(int note, long eventTimestamp, Button keyButton, long noteDuration, int totalNotes, AtomicInteger notesPlayed, double playbackSpeed, Pane notePane) {
+    private void scheduleFallingNoteAnimation(int note, long eventTimestamp, Button keyButton, long noteDuration, int totalNotes, AtomicInteger notesPlayed, double playbackSpeed, Pane notePane, MidiChannel channel) {
         if (keyButton == null) return;
 
         double x = keyButton.getLayoutX();
@@ -140,6 +142,7 @@ public class AnimationManager {
      * @param playbackSpeed     The new playback speed multiplier.
      */
     public void updateAnimationSpeeds(double playbackSpeed) {
+        this.playbackSpeed = playbackSpeed;
         notePane.getChildren().forEach(node -> {
             if (node instanceof FallingNote) {
                 ((FallingNote) node).updateSpeed(playbackSpeed);
@@ -182,5 +185,23 @@ public class AnimationManager {
             }
         });
         notePane.getChildren().clear();
+    }
+
+    /**
+     * Updates playback speed based on playback settings or user preferences.
+     */
+    @Override
+    public void onPlaybackStarted() {
+        // Handle playback start event if necessary.
+    }
+
+    @Override
+    public void onPlaybackPaused() {
+        pauseAnimations();
+    }
+
+    @Override
+    public void onPlaybackStopped() {
+        stopAnimations();
     }
 }
