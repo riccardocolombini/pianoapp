@@ -7,23 +7,16 @@ public class PausedState implements PlaybackState {
     public void play(PianoController pianoController) {
         pianoController.changePlaybackState(new PlayingState());
         pianoController.setIsPlaying(true);
-        pianoController.resumePlayback();  // Riprendi la riproduzione
+        pianoController.resumePlayback();
     }
 
     @Override
     public void pause(PianoController pianoController) {
-        // Ferma la riproduzione MIDI
         pianoController.stopPlayback();
-
-        // Salva il tempo della pausa per riprendere da lì
         pianoController.pauseTime = System.currentTimeMillis();
-
-        // Ferma le animazioni
         pianoController.animationManager.stopAnimations();
-
-        // Cambia lo stato a PausedState
         pianoController.changePlaybackState(new PausedState());
-        pianoController.setIsPlaying(false); // La riproduzione è in pausa
+        pianoController.setIsPlaying(false);
     }
 
 
@@ -34,3 +27,4 @@ public class PausedState implements PlaybackState {
         pianoController.resetPlayback();
     }
 }
+
